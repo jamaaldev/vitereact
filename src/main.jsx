@@ -1,10 +1,20 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App'
-import './index.css'
+import React from "react";
+import { render } from "@wordpress/element";
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+import App from "./App";
+import "./index.css";
+import Dashboard from "./Dashboard";
+render(
   <React.StrictMode>
     <App />
-  </React.StrictMode>
-)
+    <Dashboard />
+  </React.StrictMode>,
+
+  document.getElementById("root"),
+);
+// ReactDOM.createRoot(document.getElementById("root")).render(
+//   <React.StrictMode>
+//     <App />
+//     <Dashboard />
+//   </React.StrictMode>,
+// );
