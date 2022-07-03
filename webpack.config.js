@@ -1,9 +1,9 @@
 const path = require("path");
-const HtmlWebPackPlugin = require("html-webpack-plugin");
 const DependencyExtractionWebpackPlugin = require("@wordpress/dependency-extraction-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
-  mode: "development", //production
+  mode: "production", //production,development
   entry: {
     main: path.resolve(__dirname, "src/Dashboard"),
   },
@@ -15,6 +15,11 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.(s*)css$/,
+        exclude: /node_modules/,
+        use: [MiniCssExtractPlugin.loader, "css-loader"],
+      },
+      {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: {
@@ -25,16 +30,15 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: ["*", ".js", ".jsx"],
+    extensions: ["*", ".js", ".jsx", ".css"],
   },
   //loaders
 
   //plugins
   plugins: [
-    new HtmlWebPackPlugin({
-      title: "just for fun",
-      filename: "index.html",
-    }),
     new DependencyExtractionWebpackPlugin(),
+    new MiniCssExtractPlugin({
+      filename: "[name].bundle.css",
+    }),
   ],
 };
